@@ -14,6 +14,8 @@ document.addEventListener('click', function (e) {
 
     } else if (e.target.dataset.replyuid) {
         addReply(e.target.dataset.replyuid)
+    } else if (e.target.dataset.delete) {
+        deleteTweet(e.target.dataset.delete)
     }
 })
 
@@ -63,6 +65,14 @@ function tweetPost() {
     })
     document.getElementById('tweet-area').value = ''
     render()
+}
+
+function deleteTweet(tweetId) {
+    const tweetObj = tweetsData.filter(function (tweet) {
+        return tweet.uuid !== tweetId
+    })
+    render()
+
 }
 
 function addReply(replyId) {
@@ -120,10 +130,8 @@ function getFeedHtml() {
                 <div class="tweet-inner">
                     <img src=${tweet.profilePic} class="profile-pic">
                     <div>
-                    <div>
+                    
                         <p class="handle">${tweet.handle}</p>
-                       <i class="fa-solid fa-ellipsis"></i>
-                    </div>
                         <p class="tweet-text">${tweet.tweetText} </p>
                         <div class="tweet-details">
                             <span class="tweet-detail">
@@ -137,6 +145,9 @@ function getFeedHtml() {
                             <span class="tweet-detail">
                             <i class="fa-solid fa-retweet ${retweeted}" data-retweet=${tweet.uuid}></i>
                                 ${tweet.retweets} 
+                            </span>
+                            <span>
+                            <i class="fa-solid fa-trash delete-btn" data-delete=${tweet.uuid}></i>
                             </span>
                         </div>   
                     </div>            

@@ -18,6 +18,12 @@ i {
     cursor: pointer;
 }
 
+
+.delete-btn {
+    position: absolute;
+    padding-left: 20px;
+}
+
 .liked {
     color: red;
 }
@@ -108,6 +114,7 @@ button {
 
 .tweet-details {
     display: flex;
+    position: relative;
     font-size: 13px;
     justify-content: space-between;
     width: 160px;
