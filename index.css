@@ -58,6 +58,27 @@ textarea {
     resize: none;
 }
 
+.replySec {
+    display: flex;
+    position: relative;
+    margin-top: 10px;
+
+}
+
+.reply-btn {
+    position: absolute;
+    bottom: 30px;
+    right: 15px
+}
+
+.replyText {
+    width: 100%;
+    border: 1px solid #0F8CDF;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
 button {
     background-color: #1DA1F2;
     border: none;

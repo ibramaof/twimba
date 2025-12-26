@@ -12,6 +12,8 @@ document.addEventListener('click', function (e) {
     } else if (e.target.id === "tweet-btn" && document.getElementById('tweet-area').value) {
         tweetPost()
 
+    } else if (e.target.dataset.replyuid) {
+        addReply(e.target.dataset.replyuid)
     }
 })
 
@@ -49,7 +51,7 @@ function getRetweetsClick(retweetId) {
 
 function tweetPost() {
     tweetsData.unshift({
-        handle: `@sibrahim 💎`,
+        handle: `@ibrahim 💎`,
         profilePic: `images/scrimbalogo.png`,
         likes: 0,
         retweets: 0,
@@ -61,6 +63,24 @@ function tweetPost() {
     })
     document.getElementById('tweet-area').value = ''
     render()
+}
+
+function addReply(replyId) {
+    const tweetObj = tweetsData.filter(function (tweet) {
+        return tweet.uuid === replyId
+    })[0]
+    if (document.getElementById('reply-text').value) {
+        tweetObj.replies.push(
+            {
+                handle: `@ibrahim 💎`,
+                profilePic: `images/scrimbalogo.png`,
+                tweetText: document.getElementById('reply-text').value
+            }
+        )
+    }
+
+    render()
+    document.getElementById('reply-text').value = ''
 }
 function getFeedHtml() {
     let feedhtml = ''
@@ -74,7 +94,8 @@ function getFeedHtml() {
         let retweeted = ''
         if (tweet.isLiked) {
             liked = 'liked'
-        } else if (tweet.isRetweeted) {
+        }
+        if (tweet.isRetweeted) {
             retweeted = 'retweeted'
         }
         let repliesHtml = ''
@@ -99,7 +120,10 @@ function getFeedHtml() {
                 <div class="tweet-inner">
                     <img src=${tweet.profilePic} class="profile-pic">
                     <div>
+                    <div>
                         <p class="handle">${tweet.handle}</p>
+                       <i class="fa-solid fa-ellipsis"></i>
+                    </div>
                         <p class="tweet-text">${tweet.tweetText} </p>
                         <div class="tweet-details">
                             <span class="tweet-detail">
@@ -119,6 +143,10 @@ function getFeedHtml() {
                 </div>
                 <div class="hidden" id="replies-${tweet.uuid}">
                     ${repliesHtml}
+                    <div class="replySec">  
+                    <textarea class="replyText" id="reply-text" placeholder="reply to ${tweet.handle} "></textarea>
+                    <i class="fa-solid fa-paper-plane reply-btn" id="reply-btn" data-replyuid=${tweet.uuid}  style="color: #1DA1F2;"></i>
+                    </div>
                 </div>
             </div>
         `
