@@ -1,6 +1,6 @@
 # Twimba
 
-Twimba is a simple Twitter-like web application built with **HTML**, **CSS**, and **JavaScript**. It lets users view and interact with a list of posts (tweets), including liking, commenting, and adding new tweets from local data. :contentReference[oaicite:0]{index=0}
+Twimba is a simple Twitter-like web application built with **HTML**, **CSS**, and **JavaScript**. It lets users view and interact with a list of posts (tweets), including liking, commenting, and adding new tweets from local data.
 
 ## Features
 
